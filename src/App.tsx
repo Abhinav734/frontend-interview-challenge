@@ -1,3 +1,13 @@
+
+import styled from "styled-component";
 export const App = () => {
-  return <div>Hello, candidate! Your changes must be done in the App.tsx file.</div>;
+
+  const StyledButton = styled.button`
+  background-color: black;
+  font-size: 32px;
+  color: white;
+`;
+  return <>
+    <div><div>Meetings</div><div>Filter</div></div>
+  </>;
 };
