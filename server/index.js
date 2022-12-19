@@ -11,6 +11,5 @@ const requestListener = (req, res) => {
 
 const server = http.createServer(requestListener);
 server.listen(8080, () => {
-  console.log('Server started; starting create-react-app...');
-  spawn('react-scripts', ['start'], {stdio: 'inherit'})
+  console.log('Server started; please run `react-scripts start` to start the client.');
 });
