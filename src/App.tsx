@@ -104,7 +104,7 @@ export const App = () => {
     const startWorkingTime = el.working_hours.start;
     const endWorkingTime = el.working_hours.end;
     
-el.events.map(el => {
+ return el.events.map(el => {
   const startEventTime = moment(el.start).format("HH:mm");
   const endEventTime = moment(el.end).format("HH:mm");
   
