@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
+import moment from 'moment';
 export const App = () => {
   interface Data {
     user_id: number;
@@ -24,8 +25,7 @@ export const App = () => {
     fetch("http://localhost:8080/data")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        setApiData(data);
+       setApiData(data);
       })
       .catch((err) => {
         console.log(err.message);
@@ -57,6 +57,7 @@ export const App = () => {
     setValue(selectedOption.target.value);
   };
 
+  console.log("a  ", apiData.filter(el=> el.user_name === value).map(el=> el.events.map(el=>el.start)))
   return (
     <Container>
       <Contents>
@@ -95,8 +96,28 @@ export const App = () => {
                 {/* {data.filter(el => el.user_name === value).map(el => {
       el.events.filter(el => el.title)
     })} */}
-                <td>Maria Anders</td>
-                <td>Germany</td>
+               
+
+{apiData && apiData
+  .filter((el) => el.user_name === value)
+  .map((el) => {
+    const startWorkingTime = el.working_hours.start;
+    const endWorkingTime = el.working_hours.end;
+    
+el.events.map(el => {
+  const startEventTime = moment(el.start).format("HH:mm");
+  const endEventTime = moment(el.end).format("HH:mm");
+  
+
+  if(startEventTime >= startWorkingTime && endEventTime <=endWorkingTime ){
+    console.log("condition ", el.title)
+return (<td key={el.id}>{el.title}</td>)
+  }
+})
+
+  })}
+               
+                {/* <td>Germany</td> */}
               </tr>
               <tr>
                 <td>Centro comercial Moctezuma</td>
