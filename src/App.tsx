@@ -1,4 +1,5 @@
 
+import React from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
 export const App = () => {
@@ -28,19 +29,167 @@ export const App = () => {
   display: flex;
   justify-content: center;
   `;
+
+  const data = [
+    {
+      "user_id": 1,
+      "user_name": "Alice",
+      "working_hours": {
+        "start": "09:00",
+        "end": "17:00",
+        "time_zone": "America/New_York"
+      },
+      "events": [
+        {
+          "id": 1,
+          "title": "Meeting A",
+          "start": "2019-01-01T08:00:00-0500",
+          "end": "2019-01-01T9:00:00-0500"
+        },
+        {
+          "id": 2,
+          "title": "Meeting C",
+          "start": "2019-01-01T09:00:00-0500",
+          "end": "2019-01-01T10:00:00-0500"
+        },
+        {
+          "id": 3,
+          "title": "Meeting C",
+          "start": "2019-01-01T11:00:00-0500",
+          "end": "2019-01-01T12:00:00-0500"
+        },
+        {
+          "id": 4,
+          "title": "Meeting D",
+          "start": "2019-01-01T12:00:00-0500",
+          "end": "2019-01-01T12:45:00-0500"
+        },
+        {
+          "id": 5,
+          "title": "Meeting E",
+          "start": "2019-01-01T14:00:00-0500",
+          "end": "2019-01-01T15:30:00-0500"
+        }
+      ]
+    },
+    {
+      "user_id": 2,
+      "user_name": "Amir",
+      "time_zone": "America/New_York",
+      "working_hours": {
+        "start": "08:00",
+        "end": "16:00",
+        "time_zone": "America/New_York"
+      },
+      "events": [
+        {
+          "id": 1,
+          "title": "Meeting A",
+          "start": "2019-01-01T09:00:00-0500",
+          "end": "2019-01-01T09:45:00-0500"
+        },
+        {
+          "id": 3,
+          "title": "Meeting C",
+          "start": "2019-01-01T10:00:00-0500",
+          "end": "2019-01-01T10:15:00-0500"
+        },
+        {
+          "id": 5,
+          "title": "Meeting E",
+          "start": "2019-01-01T11:00:00-0500",
+          "end": "2019-01-01T13:45:00-0500"
+        },
+        {
+          "id": 7,
+          "title": "Meeting G",
+          "start": "2019-01-01T13:30:00-0500",
+          "end": "2019-01-01T14:30:00-0500"
+        }
+      ]
+    },
+    {
+      "user_id": 3,
+      "user_name": "Jordan",
+      "working_hours": {
+        "start": "10:00",
+        "end": "18:00",
+        "time_zone": "America/Los_Angeles"
+      },
+      "events": [
+        {
+          "id": 4,
+          "title": "Meeting D",
+          "start": "2019-01-01T11:00:00-0800",
+          "end": "2019-01-01T12:00:00-0800"
+        },
+        {
+          "id": 6,
+          "title": "Meeting F",
+          "start": "2019-01-01T11:30:00-0800",
+          "end": "2019-01-01T12:45:00-0800"
+        },
+        {
+          "id": 9,
+          "title": "Meeting I",
+          "start": "2019-01-01T15:30:00-0800",
+          "end": "2019-01-01T16:30:00-0800"
+        },
+        {
+          "id": 10,
+          "title": "Meeting J",
+          "start": "2019-01-01T17:30:00-0800",
+          "end": "2019-01-01T18:00:00-0800"
+        }
+      ]
+    }
+  ]
+
+  const selectOptions = data.map(el => { 
+    return {id: el.user_id, userName: el.user_name}
+  })
+
+  const [value, setValue] = React.useState( );
+
+ const handleChange = (selectedOption: any) => {
+
+   setValue(selectedOption.target.value);
+
+   console.log("selectedOption  ", selectedOption.target.value)
+
+ };
+  
   return <Container>
-    <Contents><div>Meetings</div><div><select>
+    <Contents><div>Meetings</div><div>
+    <select value={value} onChange={handleChange}>
+<option>Filter By User</option>
+{selectOptions.map((option) => (
+<option key={option.id} value={option.userName}>{option.userName}</option>
 
-<option value="fruit">Fruit</option>
+))}
 
-<option value="vegetable">Vegetable</option>
+</select>
 
-<option value="meat">Meat</option>
-
-</select></div></Contents>
+</div></Contents>
 <Contents>
 
-<div>table</div>
+<div><table>
+  <tr>
+    <th>User</th>
+    <th>Meeting</th>
+    <th>Time</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+</table></div>
 </Contents>
   </Container>;
 };
