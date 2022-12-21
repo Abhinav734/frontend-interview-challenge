@@ -155,10 +155,12 @@ export const App = () => {
 
    setValue(selectedOption.target.value);
 
-   console.log("selectedOption  ", selectedOption.target.value)
+  //  console.log("selectedOption  ", selectedOption.target.value)
 
  };
-  
+  console.log("a ", data.filter(el => el.user_name === value).map(el => {
+    el.events.filter(el => el.title)
+  }))
   return <Container>
     <Contents><div>Meetings</div><div>
     <select value={value} onChange={handleChange}>
@@ -174,13 +176,25 @@ export const App = () => {
 <Contents>
 
 <div><table>
+  <thead>
+
   <tr>
     <th>User</th>
     <th>Meeting</th>
     <th>Time</th>
   </tr>
+  </thead>
+  <tbody>
   <tr>
-    <td>Alfreds Futterkiste</td>
+    {data.filter(el => el.user_name === value).map(el => {
+      return (<td key={el.user_id}>{el.user_name}</td>)
+    })}
+    {/* {data.filter(el => el.user_name === value).map(el => {
+      return 
+    })} */}
+  {/* {data.filter(el => el.user_name === value).map(el => {
+      el.events.filter(el => el.title)
+    })} */}
     <td>Maria Anders</td>
     <td>Germany</td>
   </tr>
@@ -189,6 +203,7 @@ export const App = () => {
     <td>Francisco Chang</td>
     <td>Mexico</td>
   </tr>
+  </tbody>
 </table></div>
 </Contents>
   </Container>;
