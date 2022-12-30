@@ -33,7 +33,7 @@ export const App = () => {
   }, []);
 
   const Contents = styled.div`
-    background-color: red;
+
     width: 50%;
     display: flex;
     justify-content: center;
@@ -44,6 +44,25 @@ export const App = () => {
     display: flex;
     justify-content: center;
   `;
+
+  const StyledTable = styled.table`
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  `;
+  const TableHeader = styled.th`
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  `;
+  const TableData = styled.td`
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  `;
+  const Padding = styled.span`
+  padding-right: 4px;
+  `
 
   const selectOptions =
     apiData &&
@@ -75,21 +94,21 @@ export const App = () => {
       </Contents>
       <Contents>
         <div>
-          <table>
+          <StyledTable>
             <thead>
               <tr>
-                <th>User</th>
-                <th>Meeting</th>
-                <th>Time</th>
+                <TableHeader>User</TableHeader>
+                <TableHeader>Meeting</TableHeader>
+                <TableHeader>Time</TableHeader>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                {apiData && apiData
+              {/* <tr> */}
+                {/* {apiData && apiData
                   .filter((el) => el.user_name === value)
                   .map((el) => {
-                    return <td key={el.user_id}>{el.user_name}</td>;
-                  })}
+                    return <TableData key={el.user_id}>{el.user_name}</TableData>;
+                  })} */}
                 {/* {data.filter(el => el.user_name === value).map(el => {
       return 
     })} */}
@@ -103,7 +122,9 @@ export const App = () => {
   .map((el) => {
     const startWorkingTime = el.working_hours.start;
     const endWorkingTime = el.working_hours.end;
-    
+    const userId = el.user_id;
+    const userName = el.user_name;
+   
  return el.events.map(el => {
   const startEventTime = moment(el.start).format("HH:mm");
   const endEventTime = moment(el.end).format("HH:mm");
@@ -111,21 +132,24 @@ export const App = () => {
 
   if(startEventTime >= startWorkingTime && endEventTime <=endWorkingTime ){
     console.log("condition ", el.title)
-return (<td key={el.id}>{el.title}</td>)
+return (<>
+<tr>
+
+<TableData key={userId}>{userName}</TableData>
+<TableData key={el.id}>{el.title}</TableData>
+<TableData key={el.id}><Padding>{startEventTime}</Padding>{endEventTime}</TableData>
+</tr>
+</>)
   }
 })
 
   })}
                
-                {/* <td>Germany</td> */}
-              </tr>
-              <tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-              </tr>
+                
+              {/* </tr> */}
+             
             </tbody>
-          </table>
+          </StyledTable>
         </div>
       </Contents>
     </Container>
